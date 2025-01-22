@@ -1,7 +1,13 @@
 import { Config } from "@netlify/edge-functions"
 
 const edgeError = async () => {
-  throw new Error("error");
+  try {
+    throw new Error("error");
+  } catch (error) {
+    console.error("Edge function error:", error);
+    
+    throw error;
+  }
 };
 
 export const config: Config = {
@@ -10,3 +16,4 @@ export const config: Config = {
 }
 
 export default edgeError;
+
